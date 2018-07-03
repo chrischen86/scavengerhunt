@@ -4,26 +4,36 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using ScavengerHunt.Models;
+using ScavengerHunt.Services;
 using Swashbuckle.Swagger.Annotations;
+using Unity.Attributes;
 
 namespace ScavengerHunt.Controllers
 {
+    [EnableCors("*", "*", "*")]
     public class ValuesController : ApiController
     {
+        [Dependency]
+        public IChallengeService ChallengeService { get; set; }
+
         // GET api/values
         [SwaggerOperation("GetAll")]
-        public IEnumerable<string> Get()
+        public IEnumerable<ChallengeEntity> Get()
         {
-            return new string[] { "value1", "value2" };
+            var challenges = ChallengeService.GetPastChallenges();
+            return challenges;
         }
 
         // GET api/values/5
         [SwaggerOperation("GetById")]
         [SwaggerResponse(HttpStatusCode.OK)]
         [SwaggerResponse(HttpStatusCode.NotFound)]
-        public string Get(int id)
+        public IEnumerable<ChallengeEntity> Get(DateTime dateTime)
         {
-            return "value";
+            var challenges = ChallengeService.GetDailyChallenges();
+            return challenges;
         }
 
         // POST api/values
