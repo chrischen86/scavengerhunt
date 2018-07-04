@@ -31,9 +31,13 @@ namespace ScavengerHunt.Services
         {
             TableContinuationToken token = null;
             var entities = new List<T>();
+
+            var dummyInstance = Activator.CreateInstance<T>();
+            var tableQuery = new TableQuery<T>()
+                .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, dummyInstance.PartitionKey));
             do
             {
-                var queryResult = _table.ExecuteQuerySegmented(new TableQuery<T>(), token);
+                var queryResult = _table.ExecuteQuerySegmented(tableQuery, token);
                 entities.AddRange(queryResult.Results);
                 token = queryResult.ContinuationToken;
             } while (token != null);
@@ -44,9 +48,13 @@ namespace ScavengerHunt.Services
         {
             TableContinuationToken token = null;
             var entities = new List<T>();
+            var dummyInstance = Activator.CreateInstance<T>();
+            var defaultFilterCondition = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, dummyInstance.PartitionKey);
+            var combinedFilterCondition = TableQuery.CombineFilters(defaultFilterCondition, TableOperators.And, filterCondition);
+            var tableQuery = new TableQuery<T>().Where(combinedFilterCondition);            
             do
             {
-                var queryResult = _table.ExecuteQuerySegmented(new TableQuery<T> { FilterString = filterCondition }, token);
+                var queryResult = _table.ExecuteQuerySegmented(tableQuery, token);
                 entities.AddRange(queryResult.Results);
                 token = queryResult.ContinuationToken;
             } while (token != null);

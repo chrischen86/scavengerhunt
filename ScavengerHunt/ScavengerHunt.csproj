@@ -211,6 +211,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ScoresController.cs" />
     <Compile Include="Controllers\PastChallengeController.cs" />
     <Compile Include="Controllers\DailyChallengeController.cs" />
     <Compile Include="Controllers\TablesController.cs" />
@@ -221,11 +222,14 @@
     <Compile Include="Models\ChallengeEntity.cs" />
     <Compile Include="Models\ChallengeTypes.cs" />
     <Compile Include="Models\EventEntity.cs" />
+    <Compile Include="Models\ScoreEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ChallengeService.cs" />
     <Compile Include="Services\IChallengeService.cs" />
     <Compile Include="Services\IObjectService.cs" />
+    <Compile Include="Services\IScoreService.cs" />
     <Compile Include="Services\ObjectService.cs" />
+    <Compile Include="Services\ScoreService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationInsights.config">

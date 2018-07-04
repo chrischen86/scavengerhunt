@@ -58,5 +58,19 @@ namespace ScavengerHunt.Controllers
             var result = ObjectService.AddEntities(validated);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult SetScores(IEnumerable<ScoreEntity> scores)
+        {
+            var result = ObjectService.AddEntities<ScoreEntity>(scores);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetScores()
+        {
+            var scores = ObjectService.GetEntities<ScoreEntity>();
+            return Json(scores, JsonRequestBehavior.AllowGet);
+        }
     }
 }
