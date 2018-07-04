@@ -8,6 +8,7 @@ import AppLayout from './components/AppLayout.js';
 import ChallengeCard from './components/ChallengeCard.js';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
+import LeaderboardTable from './components/LeaderboardTable.js';
 
 const styles = theme => ({
   root: {
@@ -24,6 +25,7 @@ const styles = theme => ({
 class App extends React.Component {
   state = {
     challenges: [],
+    loaded: false,
   };
 
   handleClose = () => {
@@ -61,7 +63,8 @@ class App extends React.Component {
         // create a new "State" object without mutating 
         // the original State object. 
         const newState = Object.assign({}, this.state, {
-          challenges: challenge[0]
+          challenges: challenge[0],
+          loaded: true,
         });
 
         // store the new state object in the component's state
@@ -78,9 +81,11 @@ class App extends React.Component {
         <TitleBar title="The 407 Hunt" />
 
         <AppLayout>
-          <ChallengeCard challenge={this.state.challenges} />
+          <ChallengeCard challenge={this.state.challenges} loaded={this.state.loaded} />
+          
+          <LeaderboardTable/>
           <Paper className={classes.paper}>
-            Leaderboards
+            Past Challenges
             <Typography variant="caption" gutterBottom>
               coming soon!
             </Typography>

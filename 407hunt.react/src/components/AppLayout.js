@@ -29,7 +29,7 @@ function AppLayout(props) {
                 <Grid item xs={12} sm={6}>
                     { children[1] }
                 </Grid>
-                <Grid item xs={12} sm={12}>
+                <Grid item xs={12} sm={6}>
                     { children[2] }
                 </Grid>
             </Grid>

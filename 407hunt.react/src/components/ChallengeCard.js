@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, IconButton } from '@material-ui/core';
 
@@ -12,6 +11,7 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import Tooltip from '@material-ui/core/Tooltip';
 import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import Badge from '@material-ui/core/Badge';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const styles = theme => ({
     card: {
@@ -35,33 +35,37 @@ const styles = theme => ({
     margin: {
         margin: theme.spacing.unit * 2,
     },
+    progress: {
+        margin: theme.spacing.unit * 2,
+    },
 });
 
 class ChallengeCard extends React.Component {
 
-    state = {
-        isPictureVisible: false,
-    };
-
     render() {
         const { classes } = this.props;
-        const bull = <span className={classes.bullet}>•</span>;
-        console.log(this.props);
-
         return (
             <div>
                 <Card className={classes.card}>
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary">
-                            Challenge of the Day
-                        </Typography>
-                        <Typography variant="headline" component="h2">
-                            {this.props.challenge.title}
-                        </Typography>
-                        <Typography className={classes.pos} color="textSecondary">
-                            {this.props.challenge.description}
-                        </Typography>
-                    </CardContent>
+                    {this.props.loaded && (
+                        <CardContent>
+
+                            <Typography className={classes.title} color="textSecondary">
+                                Challenge of the Day
+                            </Typography>
+                            <Typography variant="headline" component="h2">
+                                {this.props.challenge.title}
+                            </Typography>
+                            <Typography className={classes.pos} color="textSecondary">
+                                {this.props.challenge.description}
+                            </Typography>
+
+
+                        </CardContent>
+                    )}
+                    {!this.props.loaded && (
+                        <CircularProgress className={classes.progress} color="secondary" />
+                    )}
                     <CardActions className={classes.actions} disableActionSpacing>
 
                         {this.props.challenge.type === "Picture" && (
