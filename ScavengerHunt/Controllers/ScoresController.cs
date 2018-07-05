@@ -7,11 +7,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Filters;
 using Unity.Attributes;
 
 namespace ScavengerHunt.Controllers
 {
-    [EnableCors("*", "*", "*")]
+    [EnableCors("*", "*", "*", "*")]
+    [LastUpdatedHeaderFilter]
     public class ScoresController : ApiController
     {
         [Dependency]
@@ -20,7 +22,21 @@ namespace ScavengerHunt.Controllers
         public IEnumerable<ScoreEntity> Get()
         {
             var scores = ScoreService.GetScores();
+            var updateInfo = ScoreService.GetUpdateInfo();
+            var updateDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(updateInfo.LastUpdated, "Eastern Standard Time");
+            Request.Properties["LastUpdated"] = updateDate.ToString();
+
             return scores;
+        }
+    }
+
+    public class LastUpdatedHeaderFilter : ActionFilterAttribute
+    {
+        public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
+        {
+            var lastUpdated = actionExecutedContext.Request.Properties["LastUpdated"] as string;
+            actionExecutedContext.Response.Content.Headers.Add("LastUpdated", lastUpdated);
+            base.OnActionExecuted(actionExecutedContext);
         }
     }
 }

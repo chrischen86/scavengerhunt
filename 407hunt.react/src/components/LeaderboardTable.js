@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
@@ -19,6 +20,9 @@ import grey from '@material-ui/core/colors/grey';
 import amber from '@material-ui/core/colors/amber';
 
 import TrophyIcon from 'react-icons/lib/io/trophy';
+import GameIcon from 'react-icons/lib/io/ios-game-controller-b';
+import Avatar from '@material-ui/core/Avatar';
+import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
     card: {
@@ -41,6 +45,12 @@ const styles = theme => ({
         whiteSpace: 'nowrap',
         paddingRight: 0
     },
+    cardHeader: {
+        textAlign: 'left',
+    },
+    avatar: {
+        backgroundColor: theme.palette.primary.main,
+    },
 });
 
 class LeaderboardTable extends React.Component {
@@ -56,7 +66,6 @@ class LeaderboardTable extends React.Component {
         axios
             .get("http://407services.azurewebsites.net/api/scores", config)
             .then(response => {
-                console.log(response);
                 // create an array of contacts only with relevant data
                 const scores = response.data.map(c => {
                     return {
@@ -71,6 +80,15 @@ class LeaderboardTable extends React.Component {
                 const newState = Object.assign({}, this.state, {
                     scores: scores,
                     loaded: true,
+                    lastUpdated: "Last updated " + new Date(response.headers.lastupdated)
+                        .toLocaleDateString("en-US", {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: 'numeric',
+                            second: 'numeric',
+                        }),
                 });
 
                 // store the new state object in the component's state
@@ -90,12 +108,19 @@ class LeaderboardTable extends React.Component {
         return (
             <div>
                 <Card className={classes.card} raised>
-
+                    <CardHeader className={classes.cardHeader}
+                        avatar={
+                            <Avatar className={classes.avatar}>
+                                <GameIcon size={24} style={{ marginLeft: 2 }} />
+                            </Avatar>
+                        }
+                        title="Leaderboard"
+                        subheader={this.state.lastUpdated}
+                    >
+                    </CardHeader>
+                    <Divider />
                     {this.state.loaded && (
                         <CardContent>
-                            <Typography className={classes.title} color="textSecondary">
-                                Leaderboards
-                            </Typography>
                             <Table className={classes.table} style={{ tableLayout: "auto" }}>
                                 <TableHead>
                                     <TableRow>
@@ -106,7 +131,6 @@ class LeaderboardTable extends React.Component {
                                 </TableHead>
                                 <TableBody >
                                     {this.state.scores.map((n, index) => {
-                                        console.log(n.score + ":" + currentScore);
                                         if (index === 0) {
                                             currentScore = n.score;
                                         }
@@ -134,9 +158,6 @@ class LeaderboardTable extends React.Component {
                     )}
                     {!this.state.loaded && (
                         <CardContent>
-                            <Typography className={classes.title} color="textSecondary">
-                                Leaderboards
-                            </Typography>
                             <CircularProgress className={classes.progress} color="secondary" />
                         </CardContent>
                     )}

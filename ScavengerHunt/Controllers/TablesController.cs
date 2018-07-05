@@ -20,6 +20,9 @@ namespace ScavengerHunt.Controllers
         [Dependency]
         public IObjectService ObjectService { get; set; }
 
+        [Dependency]
+        public IScoreService ScoreService { get; set; }
+
         // GET: Tables
         [HttpGet]
         public JsonResult Index()
@@ -46,7 +49,7 @@ namespace ScavengerHunt.Controllers
 
         [HttpPost]
         public JsonResult AddChallenge(ChallengeEntity challenge)
-        { 
+        {
             var result = ObjectService.AddEntity<ChallengeEntity>(challenge);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -63,6 +66,7 @@ namespace ScavengerHunt.Controllers
         public JsonResult SetScores(IEnumerable<ScoreEntity> scores)
         {
             var result = ObjectService.AddEntities<ScoreEntity>(scores);
+            ScoreService.SetUpdateInfo();
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -71,6 +75,13 @@ namespace ScavengerHunt.Controllers
         {
             var scores = ObjectService.GetEntities<ScoreEntity>();
             return Json(scores, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult GetUpdateInfo()
+        {
+            var updateInfo = ScoreService.GetUpdateInfo();
+            return Json(updateInfo, JsonRequestBehavior.AllowGet);
         }
     }
 }

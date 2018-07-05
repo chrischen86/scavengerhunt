@@ -42,7 +42,7 @@ const styles = theme => ({
     cardHeader: {
         textAlign: 'left',
     },
-    yellowAvatar: {
+    avatar: {
         backgroundColor: theme.palette.primary.main,
     }
 });
@@ -59,7 +59,7 @@ class ChallengeCard extends React.Component {
                             <CardHeader className={classes.cardHeader}
                                 avatar={
                                     <Tooltip title={"Worth " + this.props.challenge.points + " points!"}>
-                                        <Avatar className={classes.yellowAvatar}>
+                                        <Avatar className={classes.avatar}>
 
                                             {this.props.challenge.points}<Typography variant="caption" color="inherit">pt</Typography>
                                         </Avatar>
