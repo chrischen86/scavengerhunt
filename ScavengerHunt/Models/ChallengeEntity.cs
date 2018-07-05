@@ -16,6 +16,7 @@ namespace ScavengerHunt.Models
         public string Type { get; set; }
         //public ChallengeTypes Type { get; set; }
         public int Points { get; set; }
+        public string MediaFileName { get; set; }
 
         public DateTimeOffset Date { get; set; }
 

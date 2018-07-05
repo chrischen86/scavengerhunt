@@ -4,9 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
-
-import BookmarkIcon from '@material-ui/icons/Bookmark';
-import Tooltip from '@material-ui/core/Tooltip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Table from '@material-ui/core/Table';
@@ -14,13 +11,14 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
 import axios from 'axios';
 
 import yellow from '@material-ui/core/colors/yellow';
 import grey from '@material-ui/core/colors/grey';
 import amber from '@material-ui/core/colors/amber';
+
+import TrophyIcon from 'react-icons/lib/io/trophy';
 
 const styles = theme => ({
     card: {
@@ -91,7 +89,7 @@ class LeaderboardTable extends React.Component {
         var currentScore = 0;
         return (
             <div>
-                <Card className={classes.card}>
+                <Card className={classes.card} raised>
 
                     {this.state.loaded && (
                         <CardContent>
@@ -106,7 +104,7 @@ class LeaderboardTable extends React.Component {
                                         <TableCell numeric>Score</TableCell>
                                     </TableRow>
                                 </TableHead>
-                                <TableBody>
+                                <TableBody >
                                     {this.state.scores.map((n, index) => {
                                         console.log(n.score + ":" + currentScore);
                                         if (index === 0) {
@@ -119,9 +117,9 @@ class LeaderboardTable extends React.Component {
                                         return (
                                             <TableRow key={n.id}>
                                                 <TableCell className={classes.iconCell} style={{ width: 10 }}>
-                                                    {currentRank === 3 && n.score > 0 && <BookmarkIcon style={{color: gold}} />}
-                                                    {currentRank === 2 && n.score > 0 && <BookmarkIcon style={{color: silver}}  />}
-                                                    {currentRank === 1 && n.score > 0 && <BookmarkIcon style={{color: bronze}}  />}
+                                                    {currentRank === 3 && n.score > 0 && <TrophyIcon size={24} style={{ color: gold }} />}
+                                                    {currentRank === 2 && n.score > 0 && <TrophyIcon size={24} style={{ color: silver }} />}
+                                                    {currentRank === 1 && n.score > 0 && <TrophyIcon size={24} style={{ color: bronze }} />}
                                                 </TableCell>
                                                 <TableCell component="th" scope="row">
                                                     {n.team}

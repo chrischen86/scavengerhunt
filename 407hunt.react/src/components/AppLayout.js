@@ -14,6 +14,10 @@ const styles = theme => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
+    nestedGrid: {
+        height: 'auto',
+        paddingBottom: theme.spacing.unit * 3,
+    }
 });
 
 function AppLayout(props) {
@@ -22,16 +26,18 @@ function AppLayout(props) {
 
     return (
         <div className={classes.root}>
-            <Grid container spacing={24}>
-                <Grid item xs={12} sm={6}>
-                    { children[0] }
+            <Grid container spacing={24} justify="center">
+                <Grid item xs={12} sm={4} >
+                    {children[0]}
                 </Grid>
+
                 <Grid item xs={12} sm={6}>
-                    { children[1] }
+                    {children[1]}
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                    { children[2] }
+                <Grid item xs={12} sm={4}>
+                    {children[2]}
                 </Grid>
+                <Grid item xs={12} sm={6}/>
             </Grid>
         </div>
     );

@@ -57,6 +57,7 @@ class App extends React.Component {
             date: c.Date,
             points: c.Points,
             type: c.Type,
+            media: c.MediaFileName,
           };
         });
 
@@ -82,8 +83,8 @@ class App extends React.Component {
 
         <AppLayout>
           <ChallengeCard challenge={this.state.challenges} loaded={this.state.loaded} />
-          
-          <LeaderboardTable/>
+
+          <LeaderboardTable />
           <Paper className={classes.paper}>
             Past Challenges
             <Typography variant="caption" gutterBottom>
