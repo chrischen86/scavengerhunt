@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
 import LeaderboardTable from './components/LeaderboardTable.js';
 import Grid from '@material-ui/core/Grid';
+import LoadingCard from './components/LoadingCard.js';
 
 const styles = theme => ({
   root: {
@@ -28,7 +29,7 @@ const styles = theme => ({
   nestedGrid: {
     height: 'auto',
     paddingBottom: theme.spacing.unit * 3,
-}
+  }
 });
 
 class App extends React.Component {
@@ -90,10 +91,13 @@ class App extends React.Component {
         <TitleBar title="The 407 Hunt" />
         <div className={classes.content}>
           <Grid container spacing={24} justify="center">
-            <Grid container item xs={12} sm={4} >
+            <Grid container item xs={12} sm={4}>
+              {!this.state.loaded && (
+                <Grid item xs={12} sm={12} className={classes.nestedGrid}>
+                  <LoadingCard />
+                </Grid>
+              )}
               {this.state.challenges.map((n, index) => {
-                console.log(n);
-
                 return (
                   <Grid item xs={12} sm={12} key={n.id} className={classes.nestedGrid}>
                     <ChallengeCard challenge={n} loaded={this.state.loaded} />
