@@ -9,17 +9,26 @@ import ChallengeCard from './components/ChallengeCard.js';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
 import LeaderboardTable from './components/LeaderboardTable.js';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   root: {
     textAlign: 'center',
-
   },
   paper: {
     padding: theme.spacing.unit * 2,
     textAlign: 'center',
     color: theme.palette.text.secondary,
   },
+  content: {
+    flexGrow: 1,
+    paddingTop: theme.spacing.unit * 3,
+    padding: theme.spacing.unit * 1.5,
+  },
+  nestedGrid: {
+    height: 'auto',
+    paddingBottom: theme.spacing.unit * 3,
+}
 });
 
 class App extends React.Component {
@@ -60,11 +69,10 @@ class App extends React.Component {
             media: c.MediaFileName,
           };
         });
-
         // create a new "State" object without mutating 
         // the original State object. 
         const newState = Object.assign({}, this.state, {
-          challenges: challenge[0],
+          challenges: challenge,
           loaded: true,
         });
 
@@ -80,18 +88,23 @@ class App extends React.Component {
     return (
       <div className={classes.root}>
         <TitleBar title="The 407 Hunt" />
+        <div className={classes.content}>
+          <Grid container spacing={24} justify="center">
+            <Grid container item xs={12} sm={4} >
+              {this.state.challenges.map((n, index) => {
+                console.log(n);
 
-        <AppLayout>
-          <ChallengeCard challenge={this.state.challenges} loaded={this.state.loaded} />
-
-          <LeaderboardTable />
-          <Paper className={classes.paper}>
-            Past Challenges
-            <Typography variant="caption" gutterBottom>
-              coming soon!
-            </Typography>
-          </Paper>
-        </AppLayout>
+                return (
+                  <Grid item xs={12} sm={12} key={n.id} className={classes.nestedGrid}>
+                    <ChallengeCard challenge={n} loaded={this.state.loaded} />
+                  </Grid>);
+              })}
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <LeaderboardTable />
+            </Grid>
+          </Grid>
+        </div>
       </div>
     );
   }
