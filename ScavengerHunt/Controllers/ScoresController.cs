@@ -24,7 +24,7 @@ namespace ScavengerHunt.Controllers
             var scores = ScoreService.GetScores();
             var updateInfo = ScoreService.GetUpdateInfo();
             var updateDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(updateInfo.LastUpdated, "Eastern Standard Time");
-            Request.Properties["LastUpdated"] = updateDate.ToString();
+            Request.Properties["LastUpdated"] = updateDate.ToUnixTimeMilliseconds();
 
             return scores;
         }
@@ -34,7 +34,7 @@ namespace ScavengerHunt.Controllers
     {
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
-            var lastUpdated = actionExecutedContext.Request.Properties["LastUpdated"] as string;
+            var lastUpdated = actionExecutedContext.Request.Properties["LastUpdated"].ToString();
             actionExecutedContext.Response.Content.Headers.Add("LastUpdated", lastUpdated);
             base.OnActionExecuted(actionExecutedContext);
         }
