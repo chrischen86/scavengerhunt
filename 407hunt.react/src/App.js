@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from './withRoot.js';
-import TitleBar from './components/TitleBar.js';
-import AppLayout from './components/AppLayout.js';
-import ChallengeCard from './components/ChallengeCard.js';
-import Paper from '@material-ui/core/Paper';
+
 import axios from 'axios';
-import LeaderboardTable from './components/LeaderboardTable.js';
 import Grid from '@material-ui/core/Grid';
+import { Divider } from '@material-ui/core';
+
+import TitleBar from './components/TitleBar.js';
+import ChallengeCard from './components/ChallengeCard.js';
+import LeaderboardTable from './components/LeaderboardTable.js';
 import LoadingCard from './components/LoadingCard.js';
 import PastChallenges from './components/PastChallenges.js';
-import { Divider } from '@material-ui/core';
+
 
 const styles = theme => ({
   root: {
@@ -112,9 +112,9 @@ class App extends React.Component {
               <LeaderboardTable />
             </Grid>
             <Grid item xs={12} sm={12}>
-              <Divider/>
+              <Divider />
             </Grid>
-            <PastChallenges/>
+            <PastChallenges />
           </Grid>
         </div>
       </div>

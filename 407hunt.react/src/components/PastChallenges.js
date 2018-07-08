@@ -1,12 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core';
 import axios from 'axios';
 
 import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
 import ChallengeCard from './ChallengeCard';
 
 const styles = theme => ({
@@ -58,12 +55,11 @@ class PastChallenges extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
         return (
             <React.Fragment>
                 {this.state.challenges.map(tile => {
                     return (
-                        <Grid item xs={12} sm={4}>
+                        <Grid item xs={12} sm={4} key={tile.id}>
                             <ChallengeCard challenge={tile} title="Previous Challenge" loaded />
                         </Grid>
                     );

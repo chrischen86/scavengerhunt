@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -74,13 +72,14 @@ class LeaderboardTable extends React.Component {
                         score: c.Score,
                     };
                 });
-
+               
+                var lastUpdated = new Date(parseInt(response.headers.lastupdated));
                 // create a new "State" object without mutating 
                 // the original State object. 
                 const newState = Object.assign({}, this.state, {
                     scores: scores,
                     loaded: true,
-                    lastUpdated: "Last updated " + new Date(response.headers.lastupdated)
+                    lastUpdated: "Last updated " + lastUpdated
                         .toLocaleDateString("en-US", {
                             year: 'numeric',
                             month: 'long',
