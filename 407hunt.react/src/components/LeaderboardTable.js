@@ -73,21 +73,13 @@ class LeaderboardTable extends React.Component {
                     };
                 });
                
-                var lastUpdated = new Date(parseInt(response.headers.lastupdated));
+                var lastUpdated = response.headers.lastupdated; //Mobile devices don't parse unix time/dates properly, let server generate
                 // create a new "State" object without mutating 
                 // the original State object. 
                 const newState = Object.assign({}, this.state, {
                     scores: scores,
                     loaded: true,
-                    lastUpdated: "Last updated " + lastUpdated
-                        .toLocaleDateString("en-US", {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                            hour: 'numeric',
-                            minute: 'numeric',
-                            second: 'numeric',
-                        }),
+                    lastUpdated: "Last updated " + lastUpdated,
                 });
 
                 // store the new state object in the component's state

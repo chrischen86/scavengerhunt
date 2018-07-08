@@ -27,8 +27,6 @@ const styles = theme => ({
     flexGrow: 1,
     paddingTop: theme.spacing.unit * 3,
     padding: theme.spacing.unit * 1.5,
-    marginLeft: theme.spacing.unit * 16,
-    marginRight: theme.spacing.unit * 16,
   },
   nestedGrid: {
     height: 'auto',
@@ -94,8 +92,8 @@ class App extends React.Component {
       <div className={classes.root}>
         <TitleBar title="The 407 Hunt" />
         <div className={classes.content}>
-          <Grid container spacing={24} justify="flex-start">
-            <Grid container item xs={12} sm={5}>
+          <Grid container spacing={24} justify="center">
+            <Grid container item xs={12} sm={4}>
               {!this.state.loaded && (
                 <Grid item xs={12} sm={12} className={classes.nestedGrid}>
                   <LoadingCard />
@@ -108,13 +106,15 @@ class App extends React.Component {
                   </Grid>);
               })}
             </Grid>
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={12} sm={6}>
               <LeaderboardTable />
             </Grid>
-            <Grid item xs={12} sm={12}>
+            <Grid item xs={12} sm={10}>
               <Divider />
             </Grid>
-            <PastChallenges />
+            <Grid container spacing={24} justify="flex-start" xs={12} sm={10}>
+              <PastChallenges />
+            </Grid>
           </Grid>
         </div>
       </div>

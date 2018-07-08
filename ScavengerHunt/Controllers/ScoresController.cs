@@ -24,7 +24,7 @@ namespace ScavengerHunt.Controllers
             var scores = ScoreService.GetScores();
             var updateInfo = ScoreService.GetUpdateInfo();
             var updateDate = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(updateInfo.LastUpdated, "Eastern Standard Time");
-            Request.Properties["LastUpdated"] = updateDate.ToUnixTimeMilliseconds();
+            Request.Properties["LastUpdated"] = updateDate.ToString("MMMM, d yyyy, hh:mm:ss tt");
 
             return scores;
         }

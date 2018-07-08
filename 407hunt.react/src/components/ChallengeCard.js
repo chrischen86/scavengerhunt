@@ -37,9 +37,6 @@ const styles = theme => ({
     cardHeader: {
         textAlign: 'left',
     },
-    cardContent: {
-        maxHeight: '6vw'
-    },
     avatar: {
         backgroundColor: theme.palette.primary.main,
     }
