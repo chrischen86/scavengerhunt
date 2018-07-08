@@ -17,11 +17,6 @@ const styles = theme => ({
     card: {
         minWidth: 275,
     },
-    bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
-    },
     title: {
         marginBottom: 16,
         fontSize: 14,
@@ -41,6 +36,9 @@ const styles = theme => ({
     },
     cardHeader: {
         textAlign: 'left',
+    },
+    cardContent: {
+        maxHeight: '6vw'
     },
     avatar: {
         backgroundColor: theme.palette.primary.main,
@@ -65,12 +63,12 @@ class ChallengeCard extends React.Component {
                                         </Avatar>
                                     </Tooltip>
                                 }
-                                title="Challenge of the Day"
+                                title={this.props.title}
                                 subheader={new Date(this.props.challenge.date).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
                             >
                             </CardHeader>
                             <CardMedia className={classes.media} image={process.env.PUBLIC_URL + '/img/' + this.props.challenge.media}/>
-                            <CardContent>
+                            <CardContent className={classes.cardContent}>
                                 <Typography variant="headline" component="h2">
                                     {this.props.challenge.title}
                                 </Typography>
@@ -108,6 +106,10 @@ class ChallengeCard extends React.Component {
 
 ChallengeCard.propTypes = {
     classes: PropTypes.object.isRequired,
+}
+
+ChallengeCard.defaultProps = {
+    title: "Challenge of the Day",
 }
 
 export default withStyles(styles)(ChallengeCard);

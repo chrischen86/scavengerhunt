@@ -11,6 +11,8 @@ import axios from 'axios';
 import LeaderboardTable from './components/LeaderboardTable.js';
 import Grid from '@material-ui/core/Grid';
 import LoadingCard from './components/LoadingCard.js';
+import PastChallenges from './components/PastChallenges.js';
+import { Divider } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -25,6 +27,8 @@ const styles = theme => ({
     flexGrow: 1,
     paddingTop: theme.spacing.unit * 3,
     padding: theme.spacing.unit * 1.5,
+    marginLeft: theme.spacing.unit * 16,
+    marginRight: theme.spacing.unit * 16,
   },
   nestedGrid: {
     height: 'auto',
@@ -90,8 +94,8 @@ class App extends React.Component {
       <div className={classes.root}>
         <TitleBar title="The 407 Hunt" />
         <div className={classes.content}>
-          <Grid container spacing={24} justify="center">
-            <Grid container item xs={12} sm={4}>
+          <Grid container spacing={24} justify="flex-start">
+            <Grid container item xs={12} sm={5}>
               {!this.state.loaded && (
                 <Grid item xs={12} sm={12} className={classes.nestedGrid}>
                   <LoadingCard />
@@ -100,13 +104,17 @@ class App extends React.Component {
               {this.state.challenges.map((n, index) => {
                 return (
                   <Grid item xs={12} sm={12} key={n.id} className={classes.nestedGrid}>
-                    <ChallengeCard challenge={n} loaded={this.state.loaded} />
+                    <ChallengeCard challenge={n} title="Challenge of the Day" loaded={this.state.loaded} />
                   </Grid>);
               })}
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={7}>
               <LeaderboardTable />
             </Grid>
+            <Grid item xs={12} sm={12}>
+              <Divider/>
+            </Grid>
+            <PastChallenges/>
           </Grid>
         </div>
       </div>
