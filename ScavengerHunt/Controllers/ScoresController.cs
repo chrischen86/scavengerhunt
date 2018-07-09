@@ -12,7 +12,7 @@ using Unity.Attributes;
 
 namespace ScavengerHunt.Controllers
 {
-    [EnableCors("*", "*", "*", "*")]
+    [EnableCors("*", "*", "*", "LastUpdated")]
     [LastUpdatedHeaderFilter]
     public class ScoresController : ApiController
     {
