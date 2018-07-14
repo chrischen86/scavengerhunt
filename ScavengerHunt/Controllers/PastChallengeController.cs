@@ -19,7 +19,7 @@ namespace ScavengerHunt.Controllers
 
         public IEnumerable<ChallengeEntity> Get()
         {
-            var challenges = ChallengeService.GetPastChallenges();
+            var challenges = ChallengeService.GetPastChallenges().Where(c => c.IsPastAvailable).OrderBy(c => c.Id);
             return challenges;
         }
     }

@@ -18,6 +18,8 @@ namespace ScavengerHunt.Models
         public int Points { get; set; }
         public string MediaFileName { get; set; }
 
+        public bool IsPastAvailable { get; set; }
+
         public DateTimeOffset Date { get; set; }
 
         public ChallengeEntity(int id, ChallengeTypes type)
