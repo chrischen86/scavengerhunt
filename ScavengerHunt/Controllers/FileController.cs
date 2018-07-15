@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Microsoft.WindowsAzure.Storage.Blob;
-using ScavengerHunt.Framework;
 using ScavengerHunt.Models;
 using ScavengerHunt.Services;
 using Unity.Attributes;
@@ -50,10 +48,10 @@ namespace ScavengerHunt.Controllers
                 {
                     using (var filestream = File.OpenRead(fileData.LocalFileName))
                     {
-                        var result = await FileService.SaveFileStreamAsync(filestream, 
+                        var result = await FileService.SaveFileStreamAsync(filestream,
                             fileData.Headers.ContentDisposition.FileName,
                             fileData.Headers.ContentType.MediaType,
-                            teamId, 
+                            teamId,
                             challengeId);
                     }
                     File.Delete(fileData.LocalFileName);
