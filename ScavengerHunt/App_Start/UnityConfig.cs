@@ -47,6 +47,7 @@ namespace ScavengerHunt
             container.RegisterType<IObjectService, ObjectService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IChallengeService, ChallengeService>(new ContainerControlledLifetimeManager());
             container.RegisterType<IScoreService, ScoreService>(new ContainerControlledLifetimeManager());
+            container.RegisterType<IFileService, FileService>(new ContainerControlledLifetimeManager());
         }
     }
 }
