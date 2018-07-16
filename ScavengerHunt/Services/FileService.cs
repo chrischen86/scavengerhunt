@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace ScavengerHunt.Services
 {
     public class FileService : IFileService
     {
+        private const int MAX_RETRIES = 10;
         private CloudBlobContainer _container;
 
         public FileService()
@@ -20,8 +20,8 @@ namespace ScavengerHunt.Services
 
         public async Task<CloudBlob> SaveFileStreamAsync(FileStream stream, string fileName, string contentType, string teamId, string challengeId)
         {
-            var uniqueFileName = GenerateFileName(fileName, teamId, challengeId);
-            var blob = _container.GetBlockBlobReference(uniqueFileName);
+            var blobFileName = GenerateFileName(fileName, teamId, challengeId);
+            var blob = _container.GetBlockBlobReference(blobFileName);
 
             blob.Metadata.Add("teamId", teamId);
             blob.Metadata.Add("challengeId", challengeId);
@@ -75,7 +75,11 @@ namespace ScavengerHunt.Services
         private string GenerateFileName(string fileName, string teamId, string challengeId)
         {
             var challengeFileName = fileName.TrimStart('"').TrimEnd('"');
-            challengeFileName = string.Format("{0}_{1}_{2}", challengeId, teamId, challengeFileName);
+            challengeFileName = string.Format("{0}_{1}_{2}_{3}", 
+                challengeId, 
+                teamId, 
+                DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
+                challengeFileName);
             return challengeFileName;
         }
     }
