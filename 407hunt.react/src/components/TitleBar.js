@@ -6,11 +6,14 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import CheckIcon from '@material-ui/icons/Check';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import Changelog from './Changelog';
+
 import axios from 'axios';
 
 const styles = theme => ({
@@ -26,6 +29,9 @@ const styles = theme => ({
   },
   menuItemSelected: {
     backgroundColor: "#EEEEEEEE !important",
+  },
+  primaryText: {
+    color: theme.palette.primary.contrastText,
   }
 });
 
@@ -34,6 +40,7 @@ class TitleBar extends React.Component {
     anchorEl: null,
     loaded: false,
     teams: [],
+    changelogOpen: false,
   };
 
   componentDidMount() {
@@ -77,6 +84,14 @@ class TitleBar extends React.Component {
     this.props.selectedTeamCallback(team);
   };
 
+  handleChangelog = () => {
+    this.setState({ changelogOpen: true });
+  };
+
+  dialogCallback = (dialogOpen) => {
+    this.setState({ changelogOpen: dialogOpen });
+  };
+
   render() {
     const { classes } = this.props;
     const { anchorEl } = this.state;
@@ -90,6 +105,9 @@ class TitleBar extends React.Component {
               {this.props.title}
             </Typography>
             <div>
+              <Button className={classes.primaryText} onClick={this.handleChangelog}>
+                Whats New?
+              </Button>
               <IconButton
                 aria-owns={open ? 'menu-appbar' : null}
                 aria-haspopup="true"
@@ -114,7 +132,7 @@ class TitleBar extends React.Component {
               >
                 {this.state.loaded && this.state.teams.map(t => {
                   return (
-                    <MenuItem key={t.id} classes={{selected: classes.menuItemSelected}}
+                    <MenuItem key={t.id} classes={{ selected: classes.menuItemSelected }}
                       onClick={event => this.handleMenuItemClick(event, t)}
                       selected={this.props.selectedTeam && this.props.selectedTeam.id === t.id}>
                       {this.props.selectedTeam && this.props.selectedTeam.id === t.id &&
@@ -129,6 +147,8 @@ class TitleBar extends React.Component {
               </Menu>
             </div>
           </Toolbar>
+
+          <Changelog dialogOpen={this.state.changelogOpen} dialogCallback={this.dialogCallback} />
         </AppBar>
       </div>
     );
