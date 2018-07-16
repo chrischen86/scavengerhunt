@@ -56,11 +56,12 @@ class LeaderboardTable extends React.Component {
         scores: [],
         loaded: false,
     };
-
+    
     componentDidMount() {
         var config = {
             headers: { 'Access-Control-Allow-Origin': '*' }
         };
+
         axios
             .get("http://407services.azurewebsites.net/api/scores", config)
             .then(response => {

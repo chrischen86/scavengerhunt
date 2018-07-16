@@ -12,6 +12,7 @@ import VideocamIcon from '@material-ui/icons/Videocam';
 import Tooltip from '@material-ui/core/Tooltip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Avatar from '@material-ui/core/Avatar';
+import UploadButton from './UploadButton';
 
 const styles = theme => ({
     card: {
@@ -39,6 +40,9 @@ const styles = theme => ({
     },
     avatar: {
         backgroundColor: theme.palette.primary.main,
+    },
+    input: {
+        display: 'none',
     }
 });
 
@@ -64,7 +68,7 @@ class ChallengeCard extends React.Component {
                                 subheader={new Date(this.props.challenge.date).toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}
                             >
                             </CardHeader>
-                            <CardMedia className={classes.media} image={process.env.PUBLIC_URL + '/img/' + this.props.challenge.media}/>
+                            <CardMedia className={classes.media} image={process.env.PUBLIC_URL + '/img/' + this.props.challenge.media} />
                             <CardContent className={classes.cardContent}>
                                 <Typography variant="headline" component="h2">
                                     {this.props.challenge.title}
@@ -81,11 +85,8 @@ class ChallengeCard extends React.Component {
                     <CardActions className={classes.actions} disableActionSpacing>
 
                         {this.props.challenge.type === "Picture" && (
-                            <Tooltip title="Take a picture!">
-                                <IconButton>
-                                    <PhotoCameraIcon color="inherit" />
-                                </IconButton>
-                            </Tooltip>
+                            <UploadButton challenge={this.props.challenge} selectedTeam={this.props.selectedTeam}/>
+                            
                         )}
                         {this.props.challenge.type === "Video" && (
                             <Tooltip title="Take a video!">

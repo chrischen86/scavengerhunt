@@ -60,7 +60,7 @@ class PastChallenges extends React.Component {
                 {this.state.challenges.map(tile => {
                     return (
                         <Grid item xs={12} sm={4} key={tile.id}>
-                            <ChallengeCard challenge={tile} title="Previous Challenge" loaded />
+                            <ChallengeCard challenge={tile} title="Previous Challenge" loaded selectedTeam={this.props.selectedTeam} />
                         </Grid>
                     );
                 }
