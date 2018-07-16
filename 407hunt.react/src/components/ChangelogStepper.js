@@ -28,6 +28,7 @@ const styles = theme => ({
     root: {
         maxWidth: 400,
         flexGrow: 1,
+        textAlign: 'center',
     },
     header: {
         display: 'flex',
@@ -39,9 +40,7 @@ const styles = theme => ({
     },
     img: {
         height: 255,
-        maxWidth: 400,
         overflow: 'hidden',
-        width: '100%',
     },
 });
 
