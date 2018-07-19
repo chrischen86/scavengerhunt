@@ -43,7 +43,7 @@ class PastChallenges extends React.Component {
                 // create a new "State" object without mutating 
                 // the original State object. 
                 const newState = Object.assign({}, this.state, {
-                    challenges: challenge,
+                    challenges: challenge.reverse(),
                     loaded: true,
                 });
 
