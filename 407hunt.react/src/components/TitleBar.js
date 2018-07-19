@@ -32,6 +32,7 @@ const styles = theme => ({
   },
   primaryText: {
     color: theme.palette.primary.contrastText,
+    fontSize: ".5em",
   }
 });
 
@@ -108,14 +109,15 @@ class TitleBar extends React.Component {
               <Button className={classes.primaryText} onClick={this.handleChangelog}>
                 Whats New?
               </Button>
-              <IconButton
+              <Button
+                variant="outlined"
                 aria-owns={open ? 'menu-appbar' : null}
                 aria-haspopup="true"
                 onClick={this.handleMenu}
                 color="inherit">
-                <AccountCircle />
+                {this.props.selectedTeam!== null ? this.props.selectedTeam.team: "Select Team"}
 
-              </IconButton>
+              </Button>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
