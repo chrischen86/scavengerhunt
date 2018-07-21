@@ -46,17 +46,15 @@ class Changelog extends React.Component {
                         July 20, 2018
                     </Typography>
                     <Typography>
-                        {bull}Allow users to upload videos for challenges
-                        {bull}Changelog indicator
+                        {bull}Allow users to upload videos directly by clicking on the video button <br/> 
                     </Typography>
                     <br/>
                     <Typography variant="subheading">
                         July 15, 2018
                     </Typography>
                     <Typography>
-                        {bull}Allow users to upload images for challenges
-                        {bull}Allow users to select team to enable uploads
-                        {bull}Changelogs
+                        {bull}Allow users to upload images directly by clicking on the image button <br/>
+                        {bull}Allow users to select team to enable uploads <br/>
                     </Typography>
                 </DialogContent>
                 <DialogActions>

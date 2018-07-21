@@ -67,9 +67,9 @@ class TitleBar extends React.Component {
 
         // store the new state object in the component's state
         this.setState(newState);
-        console.log(newState);
       })
       .catch(error => console.log(error));
+      this.setState({changelogOpen: this.props.changelogOpen});
   }
 
   handleMenu = event => {
@@ -115,7 +115,7 @@ class TitleBar extends React.Component {
                 aria-haspopup="true"
                 onClick={this.handleMenu}
                 color="inherit">
-                {this.props.selectedTeam!== null ? this.props.selectedTeam.team: "Select Team"}
+                {this.props.selectedTeam !== null ? this.props.selectedTeam.team : "Select Team"}
 
               </Button>
               <Menu

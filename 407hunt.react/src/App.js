@@ -13,6 +13,10 @@ import LeaderboardTable from './components/LeaderboardTable.js';
 import LoadingCard from './components/LoadingCard.js';
 import PastChallenges from './components/PastChallenges.js';
 
+const version = "1";
+const lastVersion = localStorage.getItem("lastVersion");
+const changelogOpen = lastVersion !== version;
+localStorage.setItem("lastVersion", version);
 
 const styles = theme => ({
   root: {
@@ -82,12 +86,10 @@ class App extends React.Component {
 
         // store the new state object in the component's state
         this.setState(newState);
-        console.log(newState);
       })
       .catch(error => console.log(error));
 
     var selectedTeamStored = localStorage.getItem("selectedTeam");
-    console.log(selectedTeamStored);
     if (selectedTeamStored === null) {
       return;
     }
@@ -105,7 +107,7 @@ class App extends React.Component {
     const { classes } = this.props;
     return (
       <div className={classes.root}>
-        <TitleBar title="The 407 Hunt" selectedTeam={this.state.selectedTeam} selectedTeamCallback={this.setTeamCallback} />
+        <TitleBar title="The 407 Hunt" selectedTeam={this.state.selectedTeam} selectedTeamCallback={this.setTeamCallback} changelogOpen={changelogOpen} />
         <div className={classes.content}>
           <Grid container spacing={24} justify="center">
             <Grid container item xs={12} sm={4}>
@@ -128,7 +130,7 @@ class App extends React.Component {
               <Divider />
             </Grid>
             <Grid container spacing={24} justify="flex-start" xs={12} sm={10}>
-              <PastChallenges selectedTeam={this.state.selectedTeam}/>
+              <PastChallenges selectedTeam={this.state.selectedTeam} />
             </Grid>
           </Grid>
         </div>
