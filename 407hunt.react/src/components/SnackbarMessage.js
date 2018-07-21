@@ -23,8 +23,8 @@ class SnackbarMessage extends React.Component {
         return (
             <Snackbar
                 anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
+                    vertical: 'top',
+                    horizontal: 'center',
                 }}
                 open={this.props.snackOpen}
                 autoHideDuration={6000}

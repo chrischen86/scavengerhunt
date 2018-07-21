@@ -7,8 +7,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
 import { withStyles, IconButton, CardMedia } from '@material-ui/core';
 
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
-import VideocamIcon from '@material-ui/icons/Videocam';
+
 import Tooltip from '@material-ui/core/Tooltip';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Avatar from '@material-ui/core/Avatar';
@@ -83,18 +82,7 @@ class ChallengeCard extends React.Component {
                         <CircularProgress className={classes.progress} color="secondary" />
                     )}
                     <CardActions className={classes.actions} disableActionSpacing>
-
-                        {this.props.challenge.type === "Picture" && (
-                            <UploadButton challenge={this.props.challenge} selectedTeam={this.props.selectedTeam}/>
-                            
-                        )}
-                        {this.props.challenge.type === "Video" && (
-                            <Tooltip title="Take a video!">
-                                <IconButton>
-                                    <VideocamIcon color="inherit" />
-                                </IconButton>
-                            </Tooltip>
-                        )}
+                        <UploadButton challenge={this.props.challenge} selectedTeam={this.props.selectedTeam} />
                     </CardActions>
                 </Card>
             </div>

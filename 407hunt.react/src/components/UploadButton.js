@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, IconButton } from '@material-ui/core';
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
+import VideocamIcon from '@material-ui/icons/Videocam';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import DialogAlertMessage from './DialogAlertMessage';
 import SnackbarMessage from './SnackbarMessage';
@@ -50,6 +51,10 @@ class UploadButton extends React.Component {
             return;
         }
 
+        if (event.target.files.length === 0) {
+            return;
+        }
+
         this.setState({ loading: true, success: false });
 
         const data = new FormData();
@@ -85,7 +90,7 @@ class UploadButton extends React.Component {
         const { classes } = this.props;
         return (
             <div className={classes.wrapper}>
-                <input accept="image/*"
+                <input accept="video/*,image/*"
                     className={classes.input}
                     id={"upload-" + this.props.challenge.id}
                     type="file"
@@ -95,7 +100,8 @@ class UploadButton extends React.Component {
 
 
                     <IconButton component="span">
-                        <PhotoCameraIcon color="inherit" />
+                        {this.props.challenge.type === "Picture" && (<PhotoCameraIcon color="inherit" />)}
+                        {this.props.challenge.type === "Video" && (<VideocamIcon color="inherit" />)}
                     </IconButton>
 
                 </label>
